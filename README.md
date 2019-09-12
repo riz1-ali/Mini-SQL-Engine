@@ -7,7 +7,7 @@ A mini SQL engine to replicate MySQL functionalities
 ```console
 user@linux:~/Mini-SQL-Engine$ pip3 install -r requirements.txt
 ```
-- In the files directory, there is metadata.txt, which holds the schema for tables. Also, data of tables is listed in <Table Name>.csv, and it's structure is written in metadata.txt
+- In the files directory, there is metadata.txt, which holds the schema for tables, along with the data for tables. Also, data of tables is listed in <Table Name>.csv, and it's structure is written in metadata.txt
 - To include any new table, please refer to metadata.txt for the structure syntax.
 - For the sake of simplicity, attributes are integers.
 - Syntax for executing code:-
