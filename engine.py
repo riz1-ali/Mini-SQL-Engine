@@ -901,11 +901,6 @@ def process_query(parsed_query,attribute_maps):
 				from_list.append(str(j).strip('; '))
 		if where_flag == 1 :
 			where_list.append(str(i).strip('; '))
-	for i in select_list :
-		if i.lower() == "distinct" :
-			distinct_flag = 1
-			if select_list[0].lower() != "distinct" :
-				sys.exit("DISTINCT comes before attribute names.\nPlease check your query again.")
 	while '' in from_list : from_list.remove('')
 	c = 0
 	for i in from_list:
@@ -920,6 +915,17 @@ def process_query(parsed_query,attribute_maps):
 	select_list.sort()
 	from_list.sort()
 	where_list.sort()
+	for i in select_list :
+		if i.lower() == "distinct" :
+			distinct_flag = 1
+			if select_list[0].lower() != "distinct" :
+				sys.exit("DISTINCT comes before attribute names.\nPlease check your query again.")
+		elif i=='*':
+			for table in from_list:
+				for arg in attribute_maps[table]:
+					if table+'.'+arg not in select_list:
+						select_list.append(table+'.'+arg)
+	while '*' in select_list : select_list.remove('*')
 	if len(select_list) == 0 :
 		sys.exit("Please mention what to select.")
 	if len(from_list) == 0 :
